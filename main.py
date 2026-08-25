@@ -32,7 +32,7 @@ class DiscordBot(commands.Bot):
             description="A general-purpose Discord bot",
         )
 
-        async def setup_hook(self):
+            async def setup_hook(self):
         cogs = ["cogs.moderation", "cogs.fun", "cogs.utility", "cogs.protection"]
         for cog in cogs:
             try:
@@ -41,9 +41,12 @@ class DiscordBot(commands.Bot):
             except Exception as e:
                 logger.error(f"Failed to load cog {cog}: {e}")
 
-        # Đồng bộ Slash Commands toàn cầu
+        # Sync all commands globally
         await self.tree.sync()
         logger.info("Slash commands synced globally")
+
+
+
 
         # Clear guild-specific commands (removes duplicates from previous guild syncs)
         for guild in self.guilds:
